@@ -144,7 +144,6 @@ const PORTFOLIO_DATA = {
       descriptor: "Commercial Digital Printing Business Website",
       status: "LIVE PRODUCTION",
       liveUrl: "https://rainbowprintstry.com",
-      githubUrl: "https://github.com/M-coder05/rainbow-prints",
       meta: {
         client: "Rainbow Prints Tiruchirappalli",
         role: "Lead Frontend Designer & Developer",
@@ -200,7 +199,7 @@ const PORTFOLIO_DATA = {
       title: "Smart Student Service Portal",
       descriptor: "Full-Stack Campus Service Desk & Administrative Workflow (Student_request_OD)",
       status: "LIVE PRODUCTION",
-      liveUrl: "https://smart-student-service-portal.onrender.com",
+      liveUrl: "https://smart-student-service-portal.onrender.com/index.html",
       githubUrl: "https://github.com/M-coder05/Student_request_OD",
       meta: {
         institution: "M.A.M College of Engineering & Technology",

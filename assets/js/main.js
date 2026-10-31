@@ -283,9 +283,11 @@
             <a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="press-btn press-btn-solid">
               Inspect Live Site ↗
             </a>
-            <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="press-btn press-btn-outline">
-              Source Code (GitHub) ↗
-            </a>
+            ${p.githubUrl ? `
+              <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="press-btn press-btn-outline">
+                Source Code (GitHub) ↗
+              </a>
+            ` : ''}
           </div>
         </div>
       `;
