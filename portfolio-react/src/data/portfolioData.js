@@ -40,6 +40,7 @@ const PORTFOLIO_DATA = {
     focus: "I build responsive websites with HTML, CSS, and JavaScript, and I am currently learning AI/ML and Computer Vision.",
     location: "Tiruchirappalli, Tamil Nadu, India",
     email: "cammm2005@gmail.com",
+    whatsapp: "918122681754",
     github: "https://github.com/M-coder05",
     githubDisplay: "github.com/M-coder05",
     linkedin: "https://www.linkedin.com/in/mohammedmusharaff-m",
@@ -173,6 +174,7 @@ const PORTFOLIO_DATA = {
   projects: [
     {
       id: "rainbow-prints",
+      featured: true,
       plateNumber: "PLATE 04 / PROOF A",
       slug: "rainbow-prints",
       title: "Rainbow Prints",
@@ -227,64 +229,6 @@ const PORTFOLIO_DATA = {
           width: 1400,
           height: 880,
           caption: "Responsive viewport validation across mobile (375px) and tablet (768px) screens.",
-          isHero: false
-        }
-      ]
-    },
-    {
-      id: "rainbow-prints-digital-press",
-      featured: true,
-      plateNumber: "PLATE 06 / PROOF C",
-      slug: "rainbow-prints-digital-press",
-      title: "Rainbow Prints – The Digital Press",
-      descriptor: "Commercial Website · Live Commercial Website",
-      status: "LIVE COMMERCIAL WEBSITE",
-      liveUrl: "https://rainbowprintstry.com/",
-      meta: {
-        role: "Website development",
-        stack: ["HTML5", "CSS3", "JavaScript"]
-      },
-      writeup: {
-        problem: "A printing business needed an online presence.",
-        solution: "Developed a responsive business website that showcases the business and its services, and helps visitors explore the website and contact the business.",
-        architecture: "Responsive frontend implementation using HTML5, CSS3, and JavaScript."
-      },
-      tags: ["Web"],
-      caseStudy: {
-        role: "Website development",
-        whatBuilt: "A responsive business website for a printing business."
-      },
-      specs: [
-        { label: "Project type", value: "Commercial Website" },
-        { label: "Technologies", value: "HTML5, CSS3, JavaScript" }
-      ],
-      gallery: [
-        {
-          src: "assets/images/projects/rainbow-prints/rainbow-prints-hero.webp",
-          width: 1400,
-          height: 880,
-          caption: "Rainbow Prints – The Digital Press website.",
-          isHero: true
-        },
-        {
-          src: "assets/images/projects/rainbow-prints/rainbow-prints-services.webp",
-          width: 1400,
-          height: 880,
-          caption: "Rainbow Prints website services.",
-          isHero: false
-        },
-        {
-          src: "assets/images/projects/rainbow-prints/rainbow-prints-calculator.webp",
-          width: 1400,
-          height: 880,
-          caption: "Rainbow Prints website interactive calculator.",
-          isHero: false
-        },
-        {
-          src: "assets/images/projects/rainbow-prints/rainbow-prints-responsive.webp",
-          width: 1400,
-          height: 880,
-          caption: "Rainbow Prints website responsive layouts.",
           isHero: false
         }
       ]
@@ -382,7 +326,7 @@ const PORTFOLIO_DATA = {
     image: "og-image.png"
   },
   contactCopy: {
-    formIntro: "Send a direct inquiry by preparing an email draft. The message is not sent until you choose to send it from your email app.",
+    formIntro: "Send a direct inquiry through WhatsApp, or use email as an alternative.",
   },
   projectFilterEmpty: "No {category} projects are listed yet.",
   projectFilterLabel: "Filter projects by category",

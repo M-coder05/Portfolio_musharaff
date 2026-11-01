@@ -1,5 +1,6 @@
 import portfolioData from '../data/portfolioData'
 import Reveal from './Reveal'
+import { buildWhatsAppLink } from '../utils/whatsapp'
 
 const { personal, projects } = portfolioData
 const featuredProject = projects.find((project) => project.featured)
@@ -43,6 +44,14 @@ export default function Hero() {
           <div className="hero-actions">
             <a href="#proofs" className="press-btn press-btn-solid">
               View Projects ↓
+            </a>
+            <a
+              href={buildWhatsAppLink(personal.whatsapp)}
+              className="press-btn press-btn-outline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WHATSAPP CHAT ↗
             </a>
             <a href={personal.resumePath} className="press-btn press-btn-outline" download>
               {personal.resumeLabel} ↓

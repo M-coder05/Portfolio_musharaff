@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import portfolioData from '../data/portfolioData'
 import Reveal from './Reveal'
+import { buildWhatsAppLink } from '../utils/whatsapp'
 
 const { personal } = portfolioData
 const formCopy = portfolioData.contactFormCopy
@@ -43,6 +44,7 @@ async function copyTextToClipboard(text) {
 
 export default function Contact() {
   const [values, setValues] = useState({ name: '', email: '', message: '' })
+  const honeypotRef = useRef(null)
   const [errors, setErrors] = useState({})
   const [submission, setSubmission] = useState(null)
   const [copied, setCopied] = useState(false)
@@ -69,6 +71,7 @@ export default function Contact() {
 
   function handleSubmit(event) {
     event.preventDefault()
+    if (honeypotRef.current?.value.trim()) return
 
     const nextErrors = {
       name: values.name.trim() ? '' : 'Please enter your name.',
@@ -89,7 +92,9 @@ export default function Contact() {
     }
     const message = buildMessage(submissionValues).slice(0, MAX_MESSAGE_LENGTH)
     const mailto = buildMailto(message)
-    setSubmission({ message, mailto })
+    const whatsappUrl = buildWhatsAppLink(personal.whatsapp, message)
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
+    setSubmission({ message, mailto, whatsappUrl })
     setValues({ name: '', email: '', message: '' })
     setErrors({})
     setMessageCopyStatus('')
@@ -185,6 +190,17 @@ export default function Contact() {
 
         <div className="contact-form-column">
           <form className="contact-form" onSubmit={handleSubmit} noValidate>
+            <div className="contact-honeypot" aria-hidden="true">
+              <label htmlFor="contact-company">Leave this field empty</label>
+              <input
+                id="contact-company"
+                name="company"
+                type="text"
+                tabIndex="-1"
+                autoComplete="off"
+                ref={honeypotRef}
+              />
+            </div>
             <div className="contact-field">
               <label htmlFor="contact-name">{formCopy.name}</label>
               <input
@@ -232,22 +248,30 @@ export default function Contact() {
               </p>
             </div>
             <button className="press-btn press-btn-solid" type="submit">
-              PREPARE EMAIL DRAFT
+              SEND VIA WHATSAPP
             </button>
             <p className="contact-form-note">
-              Review and send the prepared message from your email app.
+              WhatsApp opens with your message ready to send.
             </p>
           </form>
           {submission && (
             <div className="submission-feedback">
               <p className="form-status" role="status" aria-live="polite" aria-atomic="true">
-                Your email draft is ready. Select the button below to open it.
+                Opening WhatsApp…
               </p>
               <a
                 className="press-btn press-btn-outline contact-fallback-link"
+                href={submission.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open WhatsApp
+              </a>
+              <a
+                className="contact-email-fallback"
                 href={submission.mailto}
               >
-                Open Email Draft
+                Send by email instead
               </a>
               <div className="message-backup">
                 <button className="press-btn press-btn-outline" type="button" onClick={copyMessage}>
@@ -259,12 +283,6 @@ export default function Contact() {
               </div>
             </div>
           )}
-          <a
-            className="contact-email-fallback"
-            href={submission?.mailto || buildMailto(buildMessage(values))}
-          >
-            Send by email instead
-          </a>
         </div>
       </div>
     </section>

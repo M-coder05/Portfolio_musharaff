@@ -56,7 +56,7 @@ Restart `npm run dev` after changing `.env`. Never commit `.env`; `.env.example`
 
 For Netlify, add the same variables under **Site configuration → Environment variables**, then redeploy the site.
 
-The contact form runs entirely in the browser with no server, API, database, third-party form service, or secret keys. It validates the fields and prepares a `mailto:` draft; the visitor reviews and sends it from their email app. A direct email link and copy-email button are also provided.
+The contact form runs entirely in the browser with no backend, API, database, third-party form service, or secret keys. It validates the fields and opens WhatsApp with a prefilled message; visitors can copy the message or send it by email instead. A direct email link and copy-email button are also provided.
 
 ## Search and link previews
 
@@ -79,16 +79,6 @@ npm run dev
 npm run build
 npm run preview
 ```
-
-## Deploy to GitHub Pages
-
-Set `VITE_SITE_URL` to the canonical deployment URL in `.env`, then publish with:
-
-```sh
-npm run deploy
-```
-
-The deploy command builds the site and publishes `dist/` to the `gh-pages` branch. The build selects `/portfolio/` for the GitHub Pages URL and `/` for Netlify/custom root deployments. Ensure GitHub Pages is configured to deploy from the `gh-pages` branch. Netlify should publish the `dist` directory; its `public/404.html` is included in the build.
 
 ## Form, analytics, and preview checks
 
