@@ -49,14 +49,14 @@ Copy `.env.example` to `.env` in the project root and set the variables for your
 
 | Variable | Purpose |
 | --- | --- |
-| `VITE_SITE_URL` | Canonical site URL, without a trailing slash. Generates the canonical and social metadata, Person JSON-LD URL, sitemap, and robots sitemap reference. |
+| `VITE_SITE_URL` | Canonical site URL, without a trailing slash. Defaults to `https://mohammedmusharaffm.in`; set it when building for another deployment URL. Generates canonical/social metadata, Person JSON-LD, the sitemap, and robots sitemap reference. |
 | `VITE_ANALYTICS_URL` | Optional GoatCounter endpoint. Leave empty to prevent the analytics script from loading. |
 
 Restart `npm run dev` after changing `.env`. Never commit `.env`; `.env.example` contains empty values and is safe to commit.
 
 For Netlify, add the same variables under **Site configuration → Environment variables**, then redeploy the site.
 
-The contact form runs entirely in the browser with no server, API, database, third-party form service, or secret keys. It validates the fields, then opens WhatsApp with a URL-encoded message; a fallback WhatsApp link, copy button, and prefilled email link are also provided. The visitor must press Send in WhatsApp or their email app to deliver the message. The recipient number comes from `personal.whatsapp` (or `personal.phone` as a fallback) in `src/data/portfolioData.js`; change it there, using the international country code.
+The contact form runs entirely in the browser with no server, API, database, third-party form service, or secret keys. It validates the fields and prepares a `mailto:` draft; the visitor reviews and sends it from their email app. A direct email link and copy-email button are also provided.
 
 ## Search and link previews
 

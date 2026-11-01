@@ -40,7 +40,7 @@ export default function StatsStrip() {
       <div className="stats-grid">
         <div className="stat-item">
           <div className="stat-number"><CountUp value={String(portfolioData.experience.length).padStart(2, '0')} isInView={isInView} /><em>*</em></div>
-          <div className="stat-label">Web Dev Internships Completed</div>
+          <div className="stat-label">Internship Records Listed</div>
         </div>
         <div className="stat-item">
           <div className="stat-number"><CountUp value="01" isInView={isInView} /><em>*</em></div>

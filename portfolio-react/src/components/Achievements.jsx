@@ -10,6 +10,9 @@ const filters = [
   { id: 'awards', label: 'Awards & Ranks' },
   { id: 'events', label: 'Events & Workshops' },
 ]
+const highlightedAchievements = portfolioData.achievements.filter(({ id }) => (
+  id === 'achieve-sankalpana-cert' || id === 'event-pragyan-mldl'
+))
 
 function matchesFilter(item, filterId) {
   return item.category === filterId || item.categories?.includes(filterId)
@@ -36,41 +39,17 @@ export default function Achievements({ onOpenProof }) {
 
       <div className="featured-credentials" aria-labelledby="featuredCredentialsTitle">
         <div className="featured-credentials-heading">
-          <h3 id="featuredCredentialsTitle">Featured Credentials</h3>
-          <span>SELECTED CLOUD &amp; DATA RECORDS</span>
+          <h3 id="featuredCredentialsTitle">Selected Highlights</h3>
+          <span>AWARD &amp; HANDS-ON WORKSHOP</span>
         </div>
-        <div className="featured-credentials-grid">
-          {portfolioData.featuredCredentials.map((credential) => (
-            <button
-              type="button"
-              className="featured-credential-card"
-              key={credential.id}
-              aria-label={`Open ${credential.title} from ${credential.issuer}`}
-              onClick={(event) => {
-                const index = portfolioData.achievements.findIndex((item) => item.id === credential.id)
-                onOpenProof(portfolioData.achievements, index, event.currentTarget)
-              }}
-            >
-              <span className="featured-credential-image-plate">
-                <img
-                  src={credential.image}
-                  alt={credential.alt}
-                  width={credential.width}
-                  height={credential.height}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </span>
-              <span className="featured-credential-content">
-                <span className="featured-credential-label">Featured</span>
-                <span className="featured-credential-type">{credential.type}</span>
-                <span className="featured-credential-title">{credential.title}</span>
-                <span className="featured-credential-issuer">{credential.issuer}</span>
-                {credential.skills?.length > 0 && (
-                  <span className="featured-credential-skills">{credential.skills.join(', ')}</span>
-                )}
-              </span>
-            </button>
+        <div className="recognition-grid">
+          {highlightedAchievements.map((achievement) => (
+            <article className="recognition-record" key={achievement.id}>
+              <span className="recognition-record-meta">{achievement.categoryLabel} · {achievement.date}</span>
+              <h4>{achievement.title}</h4>
+              <p>{achievement.event}</p>
+              <p className="recognition-record-issuer">{achievement.issuer}</p>
+            </article>
           ))}
         </div>
       </div>

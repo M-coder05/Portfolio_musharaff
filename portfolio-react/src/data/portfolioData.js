@@ -36,32 +36,32 @@ const PORTFOLIO_DATA = {
     name: "Mohammed Musharaff S",
     avatar: "assets/images/profile/mohammed-musharaff.webp",
     pronouns: "",
-    title: "Computer Science & Engineering Undergraduate (Class of 2027)",
-    focus: "Frontend & Web Development • Expanding into Machine Learning & Computer Vision",
+    title: "Frontend Developer",
+    focus: "I build responsive websites with HTML, CSS, and JavaScript, and I am currently learning AI/ML and Computer Vision.",
     location: "Tiruchirappalli, Tamil Nadu, India",
     email: "cammm2005@gmail.com",
-    phone: "+91 81226 81754",
-    whatsapp: "https://wa.me/918122681754",
     github: "https://github.com/M-coder05",
     githubDisplay: "github.com/M-coder05",
-    linkedin: "https://linkedin.com/in/mohammedmusharaff-m",
+    linkedin: "https://www.linkedin.com/in/mohammedmusharaff-m",
     linkedinDisplay: "linkedin.com/in/mohammedmusharaff-m",
+    portfolio: "https://mohammedmusharaffm.in/",
     resumePath: "assets/resume/Mohammed_Musharaff_Resume.pdf",
     resumeLabel: "Download Resume",
     sameAs: [
       "https://github.com/M-coder05",
-      "https://linkedin.com/in/mohammedmusharaff-m"
+      "https://www.linkedin.com/in/mohammedmusharaff-m",
+      "https://mohammedmusharaffm.in/"
     ],
     education: {
       degree: "Bachelor of Engineering in Computer Science and Engineering",
       institution: "M.A.M College of Engineering and Technology, Tiruchirappalli",
       period: "2023 – 2027",
       cgpa: "7.92 (Current)",
-      standing: "3rd Year Undergraduate"
+      standing: "Final Year Undergraduate"
     },
     summaryParagraphs: [
-      "I am an undergraduate developer with three web development internships and a live commercial business site in active production. My focus is on structured frontend systems, accessible UI architecture, and robust web standards using HTML5, CSS3, and JavaScript.",
-      "Alongside web development, I build backend REST services with Node.js, Express, and MongoDB, and write analytical scripts in Python. I am actively expanding my studies into Machine Learning and Computer Vision at M.A.M College of Engineering and Technology."
+      "I am a final-year Computer Science and Engineering undergraduate at M.A.M College of Engineering and Technology, Tiruchirappalli, graduating in 2027. My current CGPA is 7.92 (Current).",
+      "I have completed web development internships at F5CODER and Elewayte, and a Python development internship at Scopik. I have experience building responsive websites with HTML, CSS, and JavaScript, and I am learning AI/ML and Computer Vision to build practical software solutions."
     ],
     languages: ["English", "Tamil", "Hindi", "Urdu"],
     availability: "Open for 2026–2027 Engineering Internships & Frontend Roles"
@@ -71,50 +71,44 @@ const PORTFOLIO_DATA = {
 
   skills: [
     {
-      category: "Core Languages",
-      lead: "Base engineering & scripting languages",
+      category: "Frontend Development",
+      lead: "Responsive interfaces and browser-based applications",
       items: [
-        { name: "JavaScript", detail: "ES6+, DOM API, Async/Await, Modular Vanilla Architecture" },
-        { name: "Python", detail: "Data analysis, automation scripts, NumPy, Pandas, OOP" },
-        { name: "Java", detail: "Object-oriented principles, data structures, Spring Boot foundations" },
-        { name: "C", detail: "Procedural programming, memory layouts, algorithmic logic" }
+        { name: "HTML5", detail: "Semantic page structure" },
+        { name: "CSS3", detail: "Responsive layouts and styling" },
+        { name: "JavaScript", detail: "Interactive browser experiences" },
+        { name: "Responsive Web Design", detail: "Layouts for mobile, tablet, and desktop" },
+        { name: "Bootstrap", detail: "Responsive UI toolkit" },
+        { name: "React.js", detail: "Practical use building this portfolio" }
       ]
     },
     {
-      category: "Frontend & Interface Design",
-      lead: "Layouts, responsive typography & visual hierarchy",
+      category: "Programming Languages",
+      lead: "Programming fundamentals",
       items: [
-        { name: "HTML5 & Semantic Markup", detail: "Accessible document trees, ARIA landmarks, SEO structure" },
-        { name: "Modern CSS3", detail: "CSS Grid, Flexbox, custom properties, responsive media queries" },
-        { name: "Responsive UI Architecture", detail: "Fluid typography, mobile-first design, layout stability (zero CLS)" },
-        { name: "UI Layout & Component Craft", detail: "Typography pairing, editorial grids, accessible color contrast" }
+        { name: "Python", detail: "Programming and introductory data workflows" },
+        { name: "C", detail: "Programming fundamentals" },
+        { name: "Java", detail: "Object-oriented programming fundamentals" }
       ]
     },
     {
-      category: "Backend & Persistence",
-      lead: "API engineering & database schemas",
+      category: "Backend & Database",
+      lead: "Foundational server-side and data technologies",
       items: [
-        { name: "Node.js (Basic)", detail: "Server runtimes, HTTP routing, asynchronous file I/O" },
-        { name: "Express.js (Basic)", detail: "RESTful API routes, middleware pipelines, JWT auth handlers" },
-        { name: "MongoDB & MongoDB Atlas", detail: "Document collections, CRUD queries, cloud clustering, indexing" }
+        { name: "Node.js", detail: "Server-side JavaScript fundamentals" },
+        { name: "Express.js", detail: "Backend routing and REST API fundamentals" },
+        { name: "MongoDB", detail: "Document database fundamentals" }
       ]
     },
     {
-      category: "Data Analysis & ML Foundations",
-      lead: "Applied data workflows & intelligent models",
+      category: "AI & Machine Learning",
+      lead: "Learning-stage interests and foundations",
       items: [
-        { name: "Data Analytics with Python", detail: "NPTEL IIT Roorkee certified (12-week analytical curriculum)" },
-        { name: "Machine Learning (In Progress)", detail: "GeeksforGeeks NIT Trichy Pragyan '26 workshop alumnus" },
-        { name: "Computer Vision (In Progress)", detail: "Feature extraction, image matrix manipulation with OpenCV" }
-      ]
-    },
-    {
-      category: "Tools & Developer Environment",
-      lead: "Version control & development editors",
-      items: [
-        { name: "Git & GitHub", detail: "Branching workflows, version tracking, open-source deployment" },
-        { name: "Visual Studio Code", detail: "Primary frontend development workspace and debugging environment" },
-        { name: "PyCharm", detail: "Python environment management, data script execution" }
+        { name: "Python for Machine Learning", detail: "Currently learning" },
+        { name: "Artificial Intelligence", detail: "Foundational concepts; learning" },
+        { name: "Machine Learning", detail: "Currently learning" },
+        { name: "Deep Learning", detail: "Introductory hands-on workshop experience" },
+        { name: "Computer Vision", detail: "Currently learning" }
       ]
     }
   ],
@@ -187,25 +181,24 @@ const PORTFOLIO_DATA = {
       liveUrl: "https://rainbowprintstry.com",
       meta: {
         client: "Rainbow Prints Tiruchirappalli",
-        role: "Lead Frontend Designer & Developer",
+        role: "Website development",
         timeline: "2024 – Present",
-        stack: ["HTML5", "CSS3", "Vanilla JavaScript", "Responsive Grid"]
+        stack: ["HTML5", "CSS3", "JavaScript"]
       },
       writeup: {
-        problem: "Local digital printing shops frequently struggle with disorganized service catalogs, opaque price estimates, and phone-call bottlenecks for simple file pre-flight checks.",
-        solution: "Built a clean, mobile-first commercial showcase with a clear service matrix, instant WhatsApp pre-flight dispatch, and a lightweight footprint that loads in under 600ms on 4G networks.",
-        architecture: "Implemented without heavyweight client frameworks to guarantee instant initial paint and zero runtime hydration delay. All stylesheets follow strict editorial layout rules with high-contrast typography."
+        problem: "A local printing business needed a website to present its services online.",
+        solution: "Developed a responsive business website with interactive elements.",
+        architecture: "Frontend implementation using HTML, CSS, and JavaScript for a real-world business use case."
       },
       tags: ["Web"],
       caseStudy: {
-        role: "Lead Frontend Designer & Developer",
-        whatBuilt: "A mobile-first commercial printing website with a service matrix, instant WhatsApp pre-flight dispatch, and a lightweight implementation."
+        role: "Frontend development",
+        whatBuilt: "A responsive business website with interactive elements."
       },
       specs: [
-        { label: "Deployment", value: "Custom Domain (rainbowprintstry.com)" },
-        { label: "Bundle Size", value: "Zero NPM Dependencies (< 45KB Core)" },
-        { label: "Navigation", value: "Accessible Single-Page Anchor Index" },
-        { label: "Conversion Flow", value: "Direct WhatsApp Order Integration" }
+        { label: "Implementation", value: "HTML5, CSS3, JavaScript" },
+        { label: "Focus", value: "Responsive user interface" },
+        { label: "Project type", value: "Business website" }
       ],
       gallery: [
         {
@@ -239,35 +232,94 @@ const PORTFOLIO_DATA = {
       ]
     },
     {
-      id: "smart-student-portal",
-      plateNumber: "PLATE 05 / PROOF B",
-      slug: "smart-student-portal",
-      title: "Smart Student Service Portal",
-      descriptor: "Full-Stack Campus Service Desk & Administrative Workflow (Student_request_OD)",
-      status: "LIVE PRODUCTION",
-      liveUrl: "https://smart-student-service-portal.onrender.com/index.html",
-      githubUrl: "https://github.com/M-coder05/Student_request_OD",
+      id: "rainbow-prints-digital-press",
+      featured: true,
+      plateNumber: "PLATE 06 / PROOF C",
+      slug: "rainbow-prints-digital-press",
+      title: "Rainbow Prints – The Digital Press",
+      descriptor: "Commercial Website · Live Commercial Website",
+      status: "LIVE COMMERCIAL WEBSITE",
+      liveUrl: "https://rainbowprintstry.com/",
       meta: {
-        institution: "M.A.M College of Engineering & Technology",
-        role: "Full-Stack Architect & Developer",
-        timeline: "2024 – 2025",
-        stack: ["Node.js", "Express.js", "MongoDB Atlas", "JWT Auth", "REST APIs", "Render"]
+        role: "Website development",
+        stack: ["HTML5", "CSS3", "JavaScript"]
       },
       writeup: {
-        problem: "Academic permission slips—Leave, On-Duty (OD), bonafide letters, and student grievances—traditionally required manual signatures across 3 different departmental buildings, causing lost records and multiday delays.",
-        solution: "Engineered a centralized portal providing authenticated paperless workflows, instant multi-stage approvals, automated PDF certificates, and live status tracking from application to endorsement.",
-        architecture: "Node.js and Express REST services backed by MongoDB Atlas. Features JSON Web Token (JWT) stateless auth, strict role-based access control (Student, Class Advisor, HOD, Academic Cell), and real-time schema validation."
+        problem: "A printing business needed an online presence.",
+        solution: "Developed a responsive business website that showcases the business and its services, and helps visitors explore the website and contact the business.",
+        architecture: "Responsive frontend implementation using HTML5, CSS3, and JavaScript."
       },
       tags: ["Web"],
       caseStudy: {
-        role: "Full-Stack Architect & Developer",
-        whatBuilt: "A centralized campus service portal with authenticated request workflows, multi-stage approvals, automated PDF certificates, and live status tracking."
+        role: "Website development",
+        whatBuilt: "A responsive business website for a printing business."
       },
       specs: [
-        { label: "Host Infrastructure", value: "Render Cloud Platform" },
-        { label: "Data Store", value: "MongoDB Atlas Managed Cluster" },
-        { label: "Auth Mechanism", value: "Stateless JWT Bearer Authentication" },
-        { label: "Workflows", value: "Leave, OD Pass, Bonafide, Grievance" }
+        { label: "Project type", value: "Commercial Website" },
+        { label: "Technologies", value: "HTML5, CSS3, JavaScript" }
+      ],
+      gallery: [
+        {
+          src: "assets/images/projects/rainbow-prints/rainbow-prints-hero.webp",
+          width: 1400,
+          height: 880,
+          caption: "Rainbow Prints – The Digital Press website.",
+          isHero: true
+        },
+        {
+          src: "assets/images/projects/rainbow-prints/rainbow-prints-services.webp",
+          width: 1400,
+          height: 880,
+          caption: "Rainbow Prints website services.",
+          isHero: false
+        },
+        {
+          src: "assets/images/projects/rainbow-prints/rainbow-prints-calculator.webp",
+          width: 1400,
+          height: 880,
+          caption: "Rainbow Prints website interactive calculator.",
+          isHero: false
+        },
+        {
+          src: "assets/images/projects/rainbow-prints/rainbow-prints-responsive.webp",
+          width: 1400,
+          height: 880,
+          caption: "Rainbow Prints website responsive layouts.",
+          isHero: false
+        }
+      ]
+    },
+    {
+      id: "smart-student-portal",
+      featured: true,
+      plateNumber: "PLATE 05 / PROOF B",
+      slug: "smart-student-portal",
+      title: "Smart Student Service Portal",
+      descriptor: "Full-stack application for college administrative services",
+      status: "LIVE PRODUCTION",
+      liveUrl: "https://smart-student-service-portal.onrender.com/",
+      githubUrl: "https://github.com/M-coder05/Student_request_OD",
+      meta: {
+        institution: "M.A.M College of Engineering & Technology",
+        role: "Full-stack development",
+        timeline: "2024 – 2025",
+        stack: ["Node.js", "Express.js", "MongoDB Atlas", "JWT authentication", "REST APIs"]
+      },
+      writeup: {
+        problem: "Students need a clear way to submit and track common college service requests.",
+        solution: "A portal for leave, On-Duty (OD), bonafide certificate, and complaint requests, with status tracking and an admin approval workflow.",
+        architecture: "Node.js and Express.js backend with REST API integration, MongoDB Atlas, JWT authentication, and role-based access control."
+      },
+      tags: ["Web"],
+      caseStudy: {
+        role: "Full-stack development",
+        whatBuilt: "A college services portal for student requests, status tracking, and administrator approvals."
+      },
+      specs: [
+        { label: "Backend", value: "Node.js and Express.js" },
+        { label: "Database", value: "MongoDB Atlas" },
+        { label: "Authentication", value: "JWT and role-based access" },
+        { label: "Services", value: "Leave, OD, bonafide, complaints" }
       ],
       gallery: [
         {
@@ -325,12 +377,12 @@ const PORTFOLIO_DATA = {
   ],
 
   seo: {
-    title: "Mohammed Musharaff S — Editorial Portfolio & Press Proof",
-    description: "Personal portfolio and technical press proof of Mohammed Musharaff S. Computer Science undergraduate, frontend web developer, and creator of Rainbow Prints.",
+    title: "Mohammed Musharaff S | Frontend Developer",
+    description: "Portfolio of Mohammed Musharaff S, a Computer Science and Engineering student, frontend developer, and aspiring AI/ML and Computer Vision developer.",
     image: "og-image.png"
   },
   contactCopy: {
-    formIntro: "Send a direct inquiry using the form. Your message opens in WhatsApp and is not sent until you choose to send it.",
+    formIntro: "Send a direct inquiry by preparing an email draft. The message is not sent until you choose to send it from your email app.",
   },
   projectFilterEmpty: "No {category} projects are listed yet.",
   projectFilterLabel: "Filter projects by category",
@@ -351,7 +403,6 @@ const PORTFOLIO_DATA = {
     name: "Name",
     email: "Email",
     message: "Message",
-    honeypot: "Leave this field empty",
     copyEmail: "Copy email",
     copied: "Copied",
     copyFailed: "Unable to copy the email address."

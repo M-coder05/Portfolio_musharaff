@@ -6,20 +6,19 @@ import portfolioData from './src/data/portfolioData.js'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_')
-  const configuredUrl = (env.VITE_SITE_URL || process.env.URL || process.env.DEPLOY_PRIME_URL)
-    ?.trim()
-    .replace(/\/+$/, '')
-  const siteUrl = configuredUrl || 'https://m-coder05.github.io/portfolio'
-  const isGitHubPages = configuredUrl ? new URL(configuredUrl).hostname.endsWith('github.io') : false
+  const configuredUrl = env.VITE_SITE_URL?.trim().replace(/\/+$/, '')
+  const siteUrl = configuredUrl || 'https://mohammedmusharaffm.in'
+  const siteOrigin = new URL(siteUrl).origin
+  const isGitHubPages = new URL(siteUrl).hostname.endsWith('github.io')
   const base = isGitHubPages ? '/portfolio/' : '/'
 
   const metadata = {
     name: portfolioData.personal.name,
     description: portfolioData.seo.description,
-    url: configuredUrl ? `${configuredUrl}/` : undefined,
+    url: `${siteUrl}/`,
     image: new URL(
       portfolioData.seo.image.replace(/^\//, ''),
-      configuredUrl ? `${new URL(siteUrl).origin}${base}` : `${siteUrl}/`
+      `${siteOrigin}${base}`
     ).toString(),
     jobTitle: portfolioData.personal.title,
     email: `mailto:${portfolioData.personal.email}`,
@@ -29,11 +28,11 @@ export default defineConfig(({ mode }) => {
   const metadataPlugin = {
     name: 'portfolio-metadata',
     transformIndexHtml(html) {
-      const canonical = metadata.url ? `<link rel="canonical" href="${metadata.url}">` : ''
+      const canonical = `<link rel="canonical" href="${metadata.url}">`
       const tags = [
         canonical,
         '<meta property="og:type" content="website">',
-        `<meta property="og:url" content="${metadata.url || `${siteUrl}/`}">`,
+        `<meta property="og:url" content="${metadata.url}">`,
         `<meta property="og:title" content="${portfolioData.seo.title}">`,
         `<meta property="og:description" content="${portfolioData.seo.description}">`,
         `<meta property="og:image" content="${metadata.image}">`,

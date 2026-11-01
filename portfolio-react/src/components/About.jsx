@@ -1,7 +1,7 @@
 import portfolioData from '../data/portfolioData'
 import Reveal from './Reveal'
 
-const { personal, achievements, featuredCredentials } = portfolioData
+const { personal, achievements } = portfolioData
 
 export default function About() {
   return (
@@ -22,10 +22,7 @@ export default function About() {
           <p className="imprint-lead">{personal.summaryParagraphs[0]}</p>
           <p>{personal.summaryParagraphs[1]}</p>
           <p>
-            I prioritize semantic markup, fast load performance, zero layout shift (CLS), and keyboard-accessible navigation. Every interface is built to function reliably under real network conditions, from local business portals to production web applications.
-          </p>
-          <p>
-            Recent credentials include {featuredCredentials.map(({ title }) => title).join(' and ')}.
+            I am interested in building practical software solutions and continue to develop my frontend skills alongside my studies in AI/ML and Computer Vision.
           </p>
         </div>
 

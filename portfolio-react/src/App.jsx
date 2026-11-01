@@ -34,6 +34,7 @@ function App() {
         <div className="crop-mark crop-bl" aria-hidden="true" />
         <div className="crop-mark crop-br" aria-hidden="true" />
 
+        <a className="skip-link" href="#mainContent">Skip to content</a>
         <Header />
         <main id="mainContent">
           <Hero />

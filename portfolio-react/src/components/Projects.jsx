@@ -134,20 +134,20 @@ function ProjectPlate({ project, index }) {
             )}
           </dl>
           <div className="case-study-links">
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="press-btn press-btn-solid">{portfolioData.caseStudyCopy.liveLink}</a>
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="press-btn press-btn-solid" aria-label={`Live demo for ${project.title} (opens in a new tab)`}>{portfolioData.caseStudyCopy.liveLink}</a>
             {project.githubUrl && (
-              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="press-btn press-btn-outline">{portfolioData.caseStudyCopy.githubLink}</a>
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="press-btn press-btn-outline" aria-label={`GitHub source for ${project.title} (opens in a new tab)`}>{portfolioData.caseStudyCopy.githubLink}</a>
             )}
           </div>
         </div>
       </details>
       <div className="project-link-actions">
-        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="press-btn press-btn-solid">
-          Inspect Live Site ↗
+        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="press-btn press-btn-solid" aria-label={`Live demo for ${project.title} (opens in a new tab)`}>
+          Live Demo ↗
         </a>
         {project.githubUrl && (
-          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="press-btn press-btn-outline">
-            Source Code (GitHub) ↗
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="press-btn press-btn-outline" aria-label={`GitHub source for ${project.title} (opens in a new tab)`}>
+            GitHub ↗
           </a>
         )}
       </div>
@@ -180,9 +180,9 @@ export default function Projects() {
   const filterTimerRef = useRef(null)
   const filters = portfolioData.projectFilterOptions
   const filteredProjects = useMemo(
-    () => activeFilter === 'All'
-      ? portfolioData.projects
-      : portfolioData.projects.filter((project) => project.tags.includes(activeFilter)),
+    () => [...portfolioData.projects]
+      .sort((first, second) => Number(Boolean(second.featured)) - Number(Boolean(first.featured)))
+      .filter((project) => activeFilter === 'All' || project.tags.includes(activeFilter)),
     [activeFilter]
   )
 

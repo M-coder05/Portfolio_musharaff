@@ -106,6 +106,22 @@ ul, ol {
   outline-offset: 3px;
 }
 
+.skip-link {
+  position: fixed;
+  z-index: 9999;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.75rem 1rem;
+  transform: translateY(-160%);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 /* Motion Preference */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -1311,6 +1327,47 @@ ul, ol {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-6);
   }
+}
+
+.recognition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-4);
+}
+
+.recognition-record {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: var(--space-4);
+  border: 1px solid var(--rule);
+  background-color: var(--paper-elevated);
+}
+
+.recognition-record-meta {
+  color: var(--vermilion);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.recognition-record h4 {
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.recognition-record p {
+  color: var(--ink-secondary);
+  font-size: 0.9rem;
+}
+
+.recognition-record .recognition-record-issuer {
+  color: var(--ink-tertiary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
 }
 
 .featured-credential-card {

@@ -2,6 +2,7 @@ import portfolioData from '../data/portfolioData'
 import Reveal from './Reveal'
 
 const { personal, projects } = portfolioData
+const featuredProject = projects.find((project) => project.featured)
 
 export default function Hero() {
   const specRows = [
@@ -13,14 +14,14 @@ export default function Hero() {
   ]
 
   return (
-    <section className="plate-section" id="hero" aria-labelledby="heroTitle">
+    <section className="plate-section" id="hero" aria-labelledby="heroName">
       <div className="plate-header">
         <div className="plate-marker">
           <span className="plate-marker-num">PLATE NO. 01</span>
           <span className="plate-marker-class">DOC ID: MMS-BE-2027-PROOF</span>
         </div>
         <div className="plate-title-row">
-          <h1 className="plate-title hero-load-item" id="heroTitle">Front Matter</h1>
+          <p className="plate-title hero-load-item" id="heroTitle">Front Matter</p>
           <span className="plate-caption">EDITION 2026 • REVISED OCTOBER</span>
         </div>
       </div>
@@ -32,21 +33,22 @@ export default function Hero() {
             <span>/</span>
             <span>UNDERGRADUATE FOLIO</span>
           </div>
-          <h2 className="hero-headline hero-load-item" id="heroName">{personal.name}</h2>
+          <h1 className="hero-headline hero-load-item" id="heroName">{personal.name}</h1>
           <p className="hero-statement hero-load-item" id="heroFocus">{personal.title}</p>
+          <p className="hero-statement">{personal.focus}</p>
           <div className="hero-availability-bar hero-load-item" id="heroAvailability">
             <span className="pulse-led" aria-hidden="true" />
             {personal.availability}
           </div>
           <div className="hero-actions">
-            <a href={personal.resumePath} className="press-btn press-btn-solid" download>
-              {personal.resumeLabel} (PDF) ↓
+            <a href="#proofs" className="press-btn press-btn-solid">
+              View Projects ↓
             </a>
-            <a href="#proofs" className="press-btn press-btn-outline">
-              View Project Proofs ↓
+            <a href={personal.resumePath} className="press-btn press-btn-outline" download>
+              {personal.resumeLabel} ↓
             </a>
-            <a href={personal.whatsapp} target="_blank" rel="noopener noreferrer" className="press-btn press-btn-outline">
-              WhatsApp Chat ↗
+            <a href="#contact" className="press-btn press-btn-outline">
+              Contact Me ↓
             </a>
           </div>
         </div>
@@ -85,10 +87,10 @@ export default function Hero() {
                 </tr>
               ))}
               <tr>
-                <td className="spec-key">Live Production</td>
+                <td className="spec-key">Featured Project</td>
                 <td className="spec-val">
-                  <a href={projects[0].liveUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--vermilion)', textDecoration: 'underline' }}>
-                    rainbowprintstry.com ↗
+                  <a href={featuredProject.liveUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--vermilion)', textDecoration: 'underline' }}>
+                    {featuredProject.title} ↗
                   </a>
                 </td>
               </tr>

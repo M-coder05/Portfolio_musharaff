@@ -1,13 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import portfolioData from '../data/portfolioData'
 import Reveal from './Reveal'
 
 const { personal } = portfolioData
 const formCopy = portfolioData.contactFormCopy
 const MAX_MESSAGE_LENGTH = 1500
-const whatsappNumber = (
-  personal.whatsapp?.match(/wa\.me\/([^/?#]+)/i)?.[1] || personal.phone
-).replace(/\D/g, '')
 
 function buildMessage({ name, email, message }) {
   return `Hi Mohammed, I found your portfolio.\nName: ${name}\nEmail: ${email}\nMessage: ${message}`
@@ -48,26 +45,13 @@ export default function Contact() {
   const [values, setValues] = useState({ name: '', email: '', message: '' })
   const [errors, setErrors] = useState({})
   const [submission, setSubmission] = useState(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [copied, setCopied] = useState(false)
   const [messageCopyStatus, setMessageCopyStatus] = useState('')
-  const honeypotRef = useRef(null)
   const messageLimit = Math.max(
     0,
     MAX_MESSAGE_LENGTH - buildMessage({ ...values, message: '' }).length
   )
   const characterCount = buildMessage(values).length
-
-  useEffect(() => {
-    if (!submission) return undefined
-
-    const timeoutId = window.setTimeout(() => {
-      setSubmission(null)
-      setMessageCopyStatus('')
-    }, 8000)
-
-    return () => window.clearTimeout(timeoutId)
-  }, [submission])
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -85,7 +69,6 @@ export default function Contact() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    if (honeypotRef.current?.value || isSubmitting) return
 
     const nextErrors = {
       name: values.name.trim() ? '' : 'Please enter your name.',
@@ -105,20 +88,11 @@ export default function Contact() {
       message: values.message
     }
     const message = buildMessage(submissionValues).slice(0, MAX_MESSAGE_LENGTH)
-    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
-
-    try {
-      window.open(url, '_blank', 'noopener,noreferrer')
-    } catch (error) {
-      console.error('Unable to open WhatsApp automatically; the fallback link is available.', error)
-    }
-    setSubmission({ message, url, mailto: buildMailto(message) })
+    const mailto = buildMailto(message)
+    setSubmission({ message, mailto })
     setValues({ name: '', email: '', message: '' })
     setErrors({})
     setMessageCopyStatus('')
-    if (honeypotRef.current) honeypotRef.current.value = ''
-    setIsSubmitting(true)
-    window.setTimeout(() => setIsSubmitting(false), 2000)
   }
 
   async function copyMessage() {
@@ -162,20 +136,34 @@ export default function Contact() {
 
       <div className="contact-grid">
         <div className="contact-details">
-          <h3 className="contact-callout">Let’s discuss an engineering role, frontend contract, or web project.</h3>
+          <h3 className="contact-callout">Let’s discuss a frontend opportunity or a practical web project.</h3>
           <p className="contact-statement">{portfolioData.contactCopy.formIntro}</p>
           <div className="contact-channels">
-            <a href={`mailto:${personal.email}`} className="contact-channel-item">
+            <a href={`mailto:${personal.email}`} className="contact-channel-item" aria-label={`Email Mohammed at ${personal.email}`}>
               <div className="contact-channel-info">
                 <span className="channel-label">Direct Mail Transmission</span>
                 <span className="channel-value">{personal.email}</span>
               </div>
               <span className="channel-arrow" aria-hidden="true">↗</span>
             </a>
-            <a href={personal.whatsapp} target="_blank" rel="noopener noreferrer" className="contact-channel-item">
+            <a href={personal.github} target="_blank" rel="noopener noreferrer" className="contact-channel-item" aria-label="GitHub profile (opens in a new tab)">
               <div className="contact-channel-info">
-                <span className="channel-label">Instant WhatsApp Chat</span>
-                <span className="channel-value">{personal.phone}</span>
+                <span className="channel-label">GitHub</span>
+                <span className="channel-value">{personal.githubDisplay}</span>
+              </div>
+              <span className="channel-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="contact-channel-item" aria-label="LinkedIn profile (opens in a new tab)">
+              <div className="contact-channel-info">
+                <span className="channel-label">LinkedIn</span>
+                <span className="channel-value">{personal.linkedinDisplay}</span>
+              </div>
+              <span className="channel-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a href={personal.portfolio} target="_blank" rel="noopener noreferrer" className="contact-channel-item" aria-label="Portfolio website (opens in a new tab)">
+              <div className="contact-channel-info">
+                <span className="channel-label">Portfolio</span>
+                <span className="channel-value">mohammedmusharaffm.in</span>
               </div>
               <span className="channel-arrow" aria-hidden="true">↗</span>
             </a>
@@ -243,36 +231,23 @@ export default function Contact() {
                 {characterCount} / {MAX_MESSAGE_LENGTH} characters
               </p>
             </div>
-            <div className="contact-honeypot" aria-hidden="true">
-              <label htmlFor="contact-website">{formCopy.honeypot}</label>
-              <input
-                ref={honeypotRef}
-                id="contact-website"
-                type="text"
-                name="website"
-                tabIndex="-1"
-                autoComplete="off"
-              />
-            </div>
-            <button className="press-btn press-btn-solid" type="submit" disabled={isSubmitting}>
-              SEND VIA WHATSAPP
+            <button className="press-btn press-btn-solid" type="submit">
+              PREPARE EMAIL DRAFT
             </button>
             <p className="contact-form-note">
-              This opens WhatsApp with your message ready to send.
+              Review and send the prepared message from your email app.
             </p>
           </form>
           {submission && (
             <div className="submission-feedback">
               <p className="form-status" role="status" aria-live="polite" aria-atomic="true">
-                Opening WhatsApp… If nothing opens, use the button below.
+                Your email draft is ready. Select the button below to open it.
               </p>
               <a
                 className="press-btn press-btn-outline contact-fallback-link"
-                href={submission.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={submission.mailto}
               >
-                Open WhatsApp
+                Open Email Draft
               </a>
               <div className="message-backup">
                 <button className="press-btn press-btn-outline" type="button" onClick={copyMessage}>

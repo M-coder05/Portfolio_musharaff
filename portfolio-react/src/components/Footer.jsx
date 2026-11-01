@@ -11,7 +11,7 @@ export default function Footer() {
             © <span id="currentYear">{currentYear}</span> {portfolioData.personal.name}. Set in <em>Newsreader</em>, <em>Plus Jakarta Sans</em>, and <em>JetBrains Mono</em>.
           </div>
           <div className="colophon-specs">
-            Crafted as an archival editorial press proof with zero frontend frameworks, zero runtime tracking, and zero database dependencies.
+            An archival editorial press proof, rendered as a static frontend.
           </div>
         </div>
         <div className="colophon-right">
