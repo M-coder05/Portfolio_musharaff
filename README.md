@@ -2,6 +2,10 @@
 
 A bespoke personal portfolio crafted with a print-shop / editorial press proof concept for **Mohammed Musharaff S** (Computer Science & Engineering, Class of 2027). Built strictly in vanilla HTML5, CSS3, and modern JavaScript with zero external frameworks, zero build steps, and zero database dependencies.
 
+## Loaders & Contact
+
+The animated “MM” intro appears once per session and is skipped when reduced motion is preferred. The static contact form opens a prefilled email draft in the visitor’s mail app; it does not send messages automatically or require a backend.
+
 ---
 
 ## 📁 Repository Directory Structure

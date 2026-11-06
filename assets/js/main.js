@@ -20,6 +20,42 @@
   let filteredAchievements = [...achievements];
   let activeLightboxIndex = 0;
 
+  function initContactForm() {
+    const form = document.getElementById("contactForm");
+    const submitButton = document.getElementById("contactSubmit");
+    const submitLabel = submitButton && submitButton.querySelector(".contact-submit-label");
+    const status = document.getElementById("contactFormStatus");
+
+    if (!form || !submitButton || !submitLabel || !status) return;
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity() || submitButton.disabled) return;
+
+      const fields = new FormData(form);
+      const name = fields.get("name");
+      const email = fields.get("email");
+      const message = fields.get("message");
+      const subject = `Portfolio inquiry from ${name}`;
+      const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+      const mailto = `mailto:cammm2005@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      submitButton.disabled = true;
+      submitButton.setAttribute("aria-busy", "true");
+      form.classList.add("is-sending");
+      submitLabel.textContent = "Opening draft";
+      status.textContent = "Opening your email draft…";
+      window.location.href = mailto;
+
+      window.setTimeout(() => {
+        form.classList.remove("is-sending");
+        submitButton.setAttribute("aria-busy", "false");
+        submitLabel.textContent = "Sent ✓";
+        status.textContent = "Your email draft is open. Complete sending in your mail app.";
+      }, 700);
+    });
+  }
+
   /* --------------------------------------------------------------------------
      1. THEME CONTROLLER (Ink / Paper Mode)
      -------------------------------------------------------------------------- */
@@ -609,6 +645,7 @@
      10. INITIALIZATION
      -------------------------------------------------------------------------- */
   document.addEventListener("DOMContentLoaded", () => {
+    initContactForm();
     initTheme();
     renderHero();
     renderImprint();

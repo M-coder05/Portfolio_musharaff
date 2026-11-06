@@ -27,8 +27,37 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    try {
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+          sessionStorage.getItem("musharaff-intro-seen") !== "true") {
+        sessionStorage.setItem("musharaff-intro-seen", "true");
+        document.documentElement.classList.add("intro-pending");
+        document.addEventListener("animationend", (event) => {
+          if (event.target instanceof Element &&
+              event.target.id === "introLoader" &&
+              event.animationName === "intro-wipe") {
+            document.documentElement.classList.remove("intro-pending");
+          }
+        });
+      }
+    } catch (error) {
+      console.warn("Intro loader skipped because browser storage or motion preference is unavailable.", error);
+    }
+  </script>
 </head>
 <body>
+
+  <div class="intro-loader" id="introLoader" aria-hidden="true">
+    <div class="intro-loader-mark">
+      <span class="intro-loader-cross intro-loader-cross-top" aria-hidden="true"></span>
+      <svg class="intro-loader-monogram" viewBox="0 0 180 120" role="presentation">
+        <text x="90" y="91" text-anchor="middle">MM</text>
+      </svg>
+      <span class="intro-loader-cross intro-loader-cross-bottom" aria-hidden="true"></span>
+      <span class="intro-loader-caption">MOHAMMED MUSHARAFF&nbsp; / &nbsp;PERSONAL FOLIO</span>
+    </div>
+  </div>
 
   <!-- Outer Sheet Container with Editorial Crop Marks -->
   <div class="sheet-wrapper">
@@ -325,8 +354,30 @@
               Let&rsquo;s discuss an engineering role, frontend contract, or web project.
             </h3>
             <p class="contact-statement">
-              No intermediary contact forms or spam filters. Reach me directly through email or WhatsApp. Responses typically sent within 24 hours.
+              Send a note using the form, or reach me directly through email or WhatsApp. Responses are typically sent within 24 hours.
             </p>
+
+            <form class="contact-form" id="contactForm">
+              <div class="contact-form-field">
+                <label for="contactName">Your name</label>
+                <input id="contactName" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="contact-form-field">
+                <label for="contactEmail">Your email</label>
+                <input id="contactEmail" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="contact-form-field">
+                <label for="contactMessage">Your message</label>
+                <textarea id="contactMessage" name="message" rows="4" required></textarea>
+              </div>
+              <button class="press-btn press-btn-solid contact-submit" id="contactSubmit" type="submit">
+                <span class="contact-submit-spinner" aria-hidden="true"></span>
+                <span class="contact-submit-label">Send inquiry</span>
+              </button>
+              <p class="contact-form-note" id="contactFormStatus" aria-live="polite">
+                This static form opens an email draft in your mail app; it does not send automatically.
+              </p>
+            </form>
 
             <div class="contact-channels">
               <a href="mailto:cammm2005@gmail.com" class="contact-channel-item">
