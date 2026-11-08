@@ -2154,39 +2154,8 @@ body,
   transform: scaleX(1);
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 450ms ease-out,
-    transform 450ms ease-out;
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.hero-load-item {
-  animation: hero-press-in 600ms ease-out both;
-}
-
-#heroTitle.hero-load-item { animation-delay: 0ms; }
-#heroName.hero-load-item { animation-delay: 100ms; }
-#heroFocus.hero-load-item { animation-delay: 200ms; }
-#heroAvailability.hero-load-item { animation-delay: 300ms; }
-#heroSpecTable.hero-load-item { animation-delay: 400ms; }
-
-@keyframes hero-press-in {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.reveal-scope {
+  display: contents;
 }
 
 .stats-grid {
@@ -4143,9 +4112,4 @@ body,
     transition-delay: 0ms !important;
   }
 
-  .reveal,
-  .hero-load-item {
-    opacity: 1 !important;
-    transform: none !important;
-  }
 }

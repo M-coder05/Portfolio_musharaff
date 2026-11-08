@@ -1,9 +1,24 @@
+import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
 import portfolioData from '../data/portfolioData'
 import Reveal from './Reveal'
+import { animateCardBatch, gsap, refreshAfterImages } from '../utils/gsap'
 
 export default function Experience() {
+  const scopeRef = useRef(null)
+  const animatedCardsRef = useRef(new Set())
+
+  useGSAP(() => {
+    const media = gsap.matchMedia()
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      animateCardBatch(scopeRef.current, animatedCardsRef.current)
+      return refreshAfterImages(scopeRef.current)
+    })
+    return () => media.revert()
+  }, { scope: scopeRef })
+
   return (
-    <section className="plate-section" id="experience" aria-labelledby="experienceTitle">
+    <section className="plate-section" id="experience" aria-labelledby="experienceTitle" ref={scopeRef}>
       <div className="plate-header">
         <div className="plate-marker">
           <span className="plate-marker-num">PLATE NO. 06</span>
@@ -16,9 +31,14 @@ export default function Experience() {
       </div>
 
       <div className="ledger-timeline" id="experienceLedger" role="feed" aria-label="Experience Timeline">
-        {portfolioData.experience.map((experience, index) => (
-          <Reveal delay={index * 60} key={experience.id}>
-          <article className="ledger-row" id={experience.id}>
+        {portfolioData.experience.map((experience) => (
+          <article
+            className="ledger-row"
+            id={experience.id}
+            data-gsap-card
+            data-card-id={`experience-${experience.id}`}
+            key={experience.id}
+          >
             <div className="ledger-margin">
               <span className="ledger-plate-id">{experience.plateNumber}</span>
               <div className="ledger-period">{experience.period}</div>
@@ -36,7 +56,6 @@ export default function Experience() {
               </div>
             </div>
           </article>
-          </Reveal>
         ))}
       </div>
     </section>

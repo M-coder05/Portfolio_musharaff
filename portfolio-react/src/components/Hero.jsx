@@ -1,11 +1,36 @@
+import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
 import portfolioData from '../data/portfolioData'
-import Reveal from './Reveal'
 import { buildWhatsAppLink } from '../utils/whatsapp'
+import { gsap, refreshAfterImages } from '../utils/gsap'
 
 const { personal, projects } = portfolioData
 const featuredProject = projects.find((project) => project.featured)
 
-export default function Hero() {
+export default function Hero({ introFinished }) {
+  const scopeRef = useRef(null)
+
+  useGSAP(() => {
+    if (!introFinished) return undefined
+
+    const media = gsap.matchMedia()
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      const items = scopeRef.current.querySelectorAll('[data-hero-entrance]')
+      gsap.fromTo(items, {
+        autoAlpha: 0,
+        y: 24,
+      }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.78,
+        stagger: 0.1,
+        ease: 'power3.out',
+      })
+      return refreshAfterImages(scopeRef.current)
+    })
+    return () => media.revert()
+  }, { scope: scopeRef, dependencies: [introFinished], revertOnUpdate: true })
+
   const specRows = [
     ['Candidate', personal.name],
     ['Discipline', "B.E. Computer Science & Eng. ('27)"],
@@ -15,14 +40,14 @@ export default function Hero() {
   ]
 
   return (
-    <section className="plate-section" id="hero" aria-labelledby="heroName">
+    <section className="plate-section" id="hero" aria-labelledby="heroName" ref={scopeRef}>
       <div className="plate-header">
         <div className="plate-marker">
           <span className="plate-marker-num">PLATE NO. 01</span>
           <span className="plate-marker-class">DOC ID: MMS-BE-2027-PROOF</span>
         </div>
         <div className="plate-title-row">
-          <p className="plate-title hero-load-item" id="heroTitle">Front Matter</p>
+          <p className="plate-title" id="heroTitle" data-hero-entrance>Front Matter</p>
           <span className="plate-caption">EDITION 2026 • REVISED OCTOBER</span>
         </div>
       </div>
@@ -34,29 +59,30 @@ export default function Hero() {
             <span>/</span>
             <span>UNDERGRADUATE FOLIO</span>
           </div>
-          <h1 className="hero-headline hero-load-item" id="heroName">{personal.name}</h1>
-          <p className="hero-statement hero-load-item" id="heroFocus">{personal.title}</p>
-          <p className="hero-statement">{personal.focus}</p>
-          <div className="hero-availability-bar hero-load-item" id="heroAvailability">
+          <h1 className="hero-headline" id="heroName" data-hero-entrance>{personal.name}</h1>
+          <p className="hero-statement" id="heroFocus" data-hero-entrance>{personal.title}</p>
+          <p className="hero-statement" data-hero-entrance>{personal.focus}</p>
+          <div className="hero-availability-bar" id="heroAvailability" data-hero-entrance>
             <span className="pulse-led" aria-hidden="true" />
             {personal.availability}
           </div>
           <div className="hero-actions">
-            <a href="#proofs" className="press-btn press-btn-solid">
+            <a href="#proofs" className="press-btn press-btn-solid" data-hero-entrance>
               View Projects ↓
             </a>
             <a
               href={buildWhatsAppLink(personal.whatsapp)}
               className="press-btn press-btn-outline"
+              data-hero-entrance
               target="_blank"
               rel="noopener noreferrer"
             >
               WHATSAPP CHAT ↗
             </a>
-            <a href={personal.resumePath} className="press-btn press-btn-outline" download>
+            <a href={personal.resumePath} className="press-btn press-btn-outline" data-hero-entrance download>
               {personal.resumeLabel} ↓
             </a>
-            <a href="#contact" className="press-btn press-btn-outline">
+            <a href="#contact" className="press-btn press-btn-outline" data-hero-entrance>
               Contact Me ↓
             </a>
           </div>
@@ -70,7 +96,7 @@ export default function Hero() {
             <line x1="0" y1="16" x2="32" y2="16" stroke="currentColor" strokeWidth="1" />
           </svg>
 
-          <figure className="hero-portrait-frame">
+          <figure className="hero-portrait-frame" data-hero-entrance>
             <img
               src={personal.avatar}
               alt={`Portrait of ${personal.name}`}
@@ -86,8 +112,7 @@ export default function Hero() {
             </figcaption>
           </figure>
 
-          <Reveal delay={400}>
-            <table className="stamp-spec-table hero-load-item" id="heroSpecTable" role="table">
+          <table className="stamp-spec-table" id="heroSpecTable" data-hero-entrance role="table">
             <tbody>
               {specRows.map(([label, value]) => (
                 <tr key={label}>
@@ -104,8 +129,7 @@ export default function Hero() {
                 </td>
               </tr>
             </tbody>
-            </table>
-          </Reveal>
+          </table>
         </aside>
       </div>
     </section>

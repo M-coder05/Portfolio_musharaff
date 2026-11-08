@@ -1,9 +1,24 @@
+import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
 import portfolioData from '../data/portfolioData'
 import Reveal from './Reveal'
+import { animateCardBatch, gsap, refreshAfterImages } from '../utils/gsap'
 
 export default function Toolkit() {
+  const scopeRef = useRef(null)
+  const animatedCardsRef = useRef(new Set())
+
+  useGSAP(() => {
+    const media = gsap.matchMedia()
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      animateCardBatch(scopeRef.current, animatedCardsRef.current)
+      return refreshAfterImages(scopeRef.current)
+    })
+    return () => media.revert()
+  }, { scope: scopeRef })
+
   return (
-    <section className="plate-section" id="toolkit" aria-labelledby="toolkitTitle">
+    <section className="plate-section" id="toolkit" aria-labelledby="toolkitTitle" ref={scopeRef}>
       <div className="plate-header">
         <div className="plate-marker">
           <span className="plate-marker-num">PLATE NO. 03</span>
@@ -16,9 +31,13 @@ export default function Toolkit() {
       </div>
 
       <div className="toolkit-index" id="toolkitContainer" role="region" aria-label="Skills by Category">
-        {portfolioData.skills.map((group, index) => (
-          <Reveal delay={index * 45} key={group.category}>
-          <article className="toolkit-category-card">
+        {portfolioData.skills.map((group) => (
+          <article
+            className="toolkit-category-card"
+            data-gsap-card
+            data-card-id={`skill-${group.category}`}
+            key={group.category}
+          >
             <div className="toolkit-cat-header">
               <span className="toolkit-cat-name">{group.category}</span>
               <span className="toolkit-cat-lead">{group.lead}</span>
@@ -34,7 +53,6 @@ export default function Toolkit() {
               </tbody>
             </table>
           </article>
-          </Reveal>
         ))}
       </div>
     </section>

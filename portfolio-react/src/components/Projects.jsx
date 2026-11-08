@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useGSAP } from '@gsap/react'
 import portfolioData from '../data/portfolioData'
 import Reveal from './Reveal'
-import useInView from '../hooks/useInView'
+import { animateCardBatch, gsap, refreshAfterImages } from '../utils/gsap'
 
 function ProjectGallery({ project }) {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -99,7 +100,6 @@ function ProjectGallery({ project }) {
 }
 
 function ProjectPlate({ project, index }) {
-  const [ref, isVisible] = useInView()
   const gallery = <ProjectGallery project={project} />
   const ledger = (
     <div className="project-ledger-box">
@@ -156,9 +156,9 @@ function ProjectPlate({ project, index }) {
 
   return (
     <article
-      className={`project-proof-plate reveal ${isVisible ? 'is-visible' : ''}`}
-      data-revealed={isVisible}
-      ref={ref}
+      className="project-proof-plate"
+      data-gsap-card
+      data-card-id={`project-${project.id}`}
       id={project.id}
     >
       <div className="project-plate-header">
@@ -175,6 +175,8 @@ function ProjectPlate({ project, index }) {
 }
 
 export default function Projects() {
+  const scopeRef = useRef(null)
+  const animatedCardsRef = useRef(new Set())
   const [activeFilter, setActiveFilter] = useState('All')
   const [gridVisible, setGridVisible] = useState(true)
   const filterTimerRef = useRef(null)
@@ -185,6 +187,15 @@ export default function Projects() {
       .filter((project) => activeFilter === 'All' || project.tags.includes(activeFilter)),
     [activeFilter]
   )
+
+  useGSAP(() => {
+    const media = gsap.matchMedia()
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      animateCardBatch(scopeRef.current, animatedCardsRef.current)
+      return refreshAfterImages(scopeRef.current)
+    })
+    return () => media.revert()
+  }, { scope: scopeRef, dependencies: [activeFilter], revertOnUpdate: true })
 
   function selectFilter(filter) {
     if (filter === activeFilter) return
@@ -199,7 +210,7 @@ export default function Projects() {
   useEffect(() => () => window.clearTimeout(filterTimerRef.current), [])
 
   return (
-    <section className="plate-section" id="proofs" aria-labelledby="proofsTitle">
+    <section className="plate-section" id="proofs" aria-labelledby="proofsTitle" ref={scopeRef}>
       <div className="plate-header">
         <div className="plate-marker">
           <span className="plate-marker-num">PLATE NO. 04 &amp; 05</span>

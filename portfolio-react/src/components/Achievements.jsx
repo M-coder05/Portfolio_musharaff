@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { useGSAP } from '@gsap/react'
 import portfolioData from '../data/portfolioData'
 import Reveal from './Reveal'
+import { animateCardBatch, gsap, refreshAfterImages } from '../utils/gsap'
 
 const filters = [
   { id: 'all', label: 'All Records' },
@@ -19,13 +21,24 @@ function matchesFilter(item, filterId) {
 }
 
 export default function Achievements({ onOpenProof }) {
+  const scopeRef = useRef(null)
+  const animatedCardsRef = useRef(new Set())
   const [activeFilter, setActiveFilter] = useState('all')
   const records = activeFilter === 'all'
     ? portfolioData.achievements
     : portfolioData.achievements.filter((item) => matchesFilter(item, activeFilter))
 
+  useGSAP(() => {
+    const media = gsap.matchMedia()
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      animateCardBatch(scopeRef.current, animatedCardsRef.current)
+      return refreshAfterImages(scopeRef.current)
+    })
+    return () => media.revert()
+  }, { scope: scopeRef, dependencies: [activeFilter], revertOnUpdate: true })
+
   return (
-    <section className="plate-section" id="achievements" aria-labelledby="achievementsTitle">
+    <section className="plate-section" id="achievements" aria-labelledby="achievementsTitle" ref={scopeRef}>
       <div className="plate-header">
         <div className="plate-marker">
           <span className="plate-marker-num">PLATE NO. 07</span>
@@ -44,7 +57,12 @@ export default function Achievements({ onOpenProof }) {
         </div>
         <div className="recognition-grid">
           {highlightedAchievements.map((achievement) => (
-            <article className="recognition-record" key={achievement.id}>
+            <article
+              className="recognition-record"
+              data-gsap-card
+              data-card-id={`highlight-${achievement.id}`}
+              key={achievement.id}
+            >
               <span className="recognition-record-meta">{achievement.categoryLabel} · {achievement.date}</span>
               <h4>{achievement.title}</h4>
               <p>{achievement.event}</p>
@@ -75,11 +93,13 @@ export default function Achievements({ onOpenProof }) {
         })}
       </div>
 
-      <div className="contact-sheet-grid" id="achievementsGrid" key={activeFilter} role="region" aria-label="Credentials contact sheet">
-        {records.map((item, index) => (
-          <Reveal delay={Math.min(index % 4, 3) * 35} key={item.id}>
+      <div className="contact-sheet-grid" id="achievementsGrid" role="region" aria-label="Credentials contact sheet">
+        {records.map((item) => (
           <article
             className="proof-card"
+            data-gsap-card
+            data-card-id={`certificate-${item.id}`}
+            key={item.id}
             tabIndex="0"
             role="button"
             aria-label={`Enlarge ${item.title}`}
@@ -111,7 +131,6 @@ export default function Achievements({ onOpenProof }) {
               <div className="proof-card-issuer">{item.issuer}</div>
             </div>
           </article>
-          </Reveal>
         ))}
       </div>
     </section>

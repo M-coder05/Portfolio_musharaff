@@ -19,12 +19,14 @@ import portfolioData from './data/portfolioData'
 const Lightbox = lazy(() => import('./components/Lightbox'))
 
 function App() {
+  const [introFinished, setIntroFinished] = useState(false)
   const [lightboxRecords, setLightboxRecords] = useState(portfolioData.achievements)
   const [lightboxIndex, setLightboxIndex] = useState(null)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
   const [lastFocus, setLastFocus] = useState(null)
 
   const closeLightbox = useCallback(() => setIsLightboxOpen(false), [])
+  const finishIntro = useCallback(() => setIntroFinished(true), [])
 
   return (
     <>
@@ -37,7 +39,7 @@ function App() {
         <a className="skip-link" href="#mainContent">Skip to content</a>
         <Header />
         <main id="mainContent">
-          <Hero />
+          <Hero introFinished={introFinished} />
           <StatsStrip />
           <Currently />
           <About />
@@ -70,7 +72,7 @@ function App() {
           />
         </Suspense>
       )}
-      <LoadingIntro />
+      <LoadingIntro onFinished={finishIntro} />
       <KeyboardShortcuts />
       <Analytics />
     </>
