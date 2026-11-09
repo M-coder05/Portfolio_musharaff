@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import portfolioData from '../data/portfolioData'
-import Reveal from './Reveal'
+import PlateHeader from './PlateHeader'
 import { animateCardBatch, gsap, refreshAfterImages } from '../utils/gsap'
 
 export default function Toolkit() {
@@ -19,16 +19,13 @@ export default function Toolkit() {
 
   return (
     <section className="plate-section" id="toolkit" aria-labelledby="toolkitTitle" ref={scopeRef}>
-      <div className="plate-header">
-        <div className="plate-marker">
-          <span className="plate-marker-num">PLATE NO. 03</span>
-          <span className="plate-marker-class">TECHNICAL INDEX</span>
-        </div>
-        <div className="plate-title-row">
-          <Reveal><h2 className="plate-title" id="toolkitTitle">Toolkit</h2></Reveal>
-          <span className="plate-caption">CORE LANGUAGES, FRAMEWORKS &amp; WORKFLOWS</span>
-        </div>
-      </div>
+      <PlateHeader
+        number="PLATE NO. 03"
+        classification="TECHNICAL INDEX"
+        title="Toolkit"
+        titleId="toolkitTitle"
+        caption="CORE LANGUAGES, FRAMEWORKS & WORKFLOWS"
+      />
 
       <div className="toolkit-index" id="toolkitContainer" role="region" aria-label="Skills by Category">
         {portfolioData.skills.map((group) => (

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import portfolioData from '../data/portfolioData'
+import PlateHeader from './PlateHeader'
 import Reveal from './Reveal'
 import { buildWhatsAppLink } from '../utils/whatsapp'
 
@@ -128,19 +129,17 @@ export default function Contact() {
 
   return (
     <section className="plate-section" id="contact" aria-labelledby="contactTitle">
-      <div className="plate-header">
-        <div className="plate-marker">
-          <span className="plate-marker-num">PLATE NO. 08</span>
-          <span className="plate-marker-class">COMMUNICATIONS</span>
-        </div>
-        <div className="plate-title-row">
-          <Reveal><h2 className="plate-title" id="contactTitle">Dispatch</h2></Reveal>
-          <span className="plate-caption">DIRECT INQUIRIES &amp; PROFESSIONAL CHANNELS</span>
-        </div>
-      </div>
+      <PlateHeader
+        number="PLATE NO. 08"
+        classification="COMMUNICATIONS"
+        title="Dispatch"
+        titleId="contactTitle"
+        caption="DIRECT INQUIRIES & PROFESSIONAL CHANNELS"
+      />
 
       <div className="contact-grid">
-        <div className="contact-details">
+        <Reveal selector=".contact-callout, .contact-statement, .contact-channel-item, .contact-tools" stagger={0.05} y={14}>
+          <div className="contact-details">
           <h3 className="contact-callout">Let’s discuss a frontend opportunity or a practical web project.</h3>
           <p className="contact-statement">{portfolioData.contactCopy.formIntro}</p>
           <div className="contact-channels">
@@ -186,9 +185,11 @@ export default function Contact() {
             </button>
                   <span className="copy-status" role="status" aria-live="polite">{copied ? formCopy.copied : ''}</span>
           </div>
-        </div>
+          </div>
+        </Reveal>
 
-        <div className="contact-form-column">
+        <Reveal selector=".contact-field, .contact-form > .press-btn, .contact-form-note" stagger={0.05} y={14}>
+          <div className="contact-form-column">
           <form className="contact-form" onSubmit={handleSubmit} noValidate>
             <div className="contact-honeypot" aria-hidden="true">
               <label htmlFor="contact-company">Leave this field empty</label>
@@ -283,7 +284,8 @@ export default function Contact() {
               </div>
             </div>
           )}
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

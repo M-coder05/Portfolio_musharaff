@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import portfolioData from '../data/portfolioData'
-import Reveal from './Reveal'
+import PlateHeader from './PlateHeader'
 import { animateCardBatch, gsap, refreshAfterImages } from '../utils/gsap'
 
 export default function Experience() {
@@ -12,6 +12,20 @@ export default function Experience() {
     const media = gsap.matchMedia()
     media.add('(prefers-reduced-motion: no-preference)', () => {
       animateCardBatch(scopeRef.current, animatedCardsRef.current)
+
+      gsap.fromTo('[data-ledger-rule]', {
+        scaleX: 0,
+        transformOrigin: 'left center',
+      }, {
+        scaleX: 1,
+        duration: 1.5,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: '#experienceLedger',
+          start: 'top 82%',
+        },
+      })
+
       return refreshAfterImages(scopeRef.current)
     })
     return () => media.revert()
@@ -19,18 +33,16 @@ export default function Experience() {
 
   return (
     <section className="plate-section" id="experience" aria-labelledby="experienceTitle" ref={scopeRef}>
-      <div className="plate-header">
-        <div className="plate-marker">
-          <span className="plate-marker-num">PLATE NO. 06</span>
-          <span className="plate-marker-class">CHRONOLOGICAL LEDGER</span>
-        </div>
-        <div className="plate-title-row">
-          <Reveal><h2 className="plate-title" id="experienceTitle">Trade Record</h2></Reveal>
-          <span className="plate-caption">INTERNSHIPS &amp; INDUSTRY APPOINTMENTS</span>
-        </div>
-      </div>
+      <PlateHeader
+        number="PLATE NO. 06"
+        classification="CHRONOLOGICAL LEDGER"
+        title="Trade Record"
+        titleId="experienceTitle"
+        caption="INTERNSHIPS & INDUSTRY APPOINTMENTS"
+      />
 
       <div className="ledger-timeline" id="experienceLedger" role="feed" aria-label="Experience Timeline">
+        <span className="ledger-rule" data-ledger-rule aria-hidden="true" />
         {portfolioData.experience.map((experience) => (
           <article
             className="ledger-row"

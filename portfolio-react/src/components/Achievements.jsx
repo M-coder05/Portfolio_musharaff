@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import portfolioData from '../data/portfolioData'
+import PlateHeader from './PlateHeader'
 import Reveal from './Reveal'
 import { animateCardBatch, gsap, refreshAfterImages } from '../utils/gsap'
 
@@ -39,22 +40,21 @@ export default function Achievements({ onOpenProof }) {
 
   return (
     <section className="plate-section" id="achievements" aria-labelledby="achievementsTitle" ref={scopeRef}>
-      <div className="plate-header">
-        <div className="plate-marker">
-          <span className="plate-marker-num">PLATE NO. 07</span>
-          <span className="plate-marker-class">VERIFIED CREDENTIALS</span>
-        </div>
-        <div className="plate-title-row">
-          <Reveal><h2 className="plate-title" id="achievementsTitle">Plates of Honour</h2></Reveal>
-          <span className="plate-caption">AWARDS, CREDENTIALS &amp; SYMPOSIA ({portfolioData.achievements.length} VERIFIED RECORDS)</span>
-        </div>
-      </div>
+      <PlateHeader
+        number="PLATE NO. 07"
+        classification="VERIFIED CREDENTIALS"
+        title="Plates of Honour"
+        titleId="achievementsTitle"
+        caption={`AWARDS, CREDENTIALS & SYMPOSIA (${portfolioData.achievements.length} VERIFIED RECORDS)`}
+      />
 
       <div className="featured-credentials" aria-labelledby="featuredCredentialsTitle">
-        <div className="featured-credentials-heading">
-          <h3 id="featuredCredentialsTitle">Selected Highlights</h3>
-          <span>AWARD &amp; HANDS-ON WORKSHOP</span>
-        </div>
+        <Reveal>
+          <div className="featured-credentials-heading">
+            <h3 id="featuredCredentialsTitle">Selected Highlights</h3>
+            <span>AWARD &amp; HANDS-ON WORKSHOP</span>
+          </div>
+        </Reveal>
         <div className="recognition-grid">
           {highlightedAchievements.map((achievement) => (
             <article
@@ -72,29 +72,31 @@ export default function Achievements({ onOpenProof }) {
         </div>
       </div>
 
-      <div className="achievements-filter-bar" role="tablist" aria-label="Filter credentials by category">
-        {filters.map((filter) => {
-          const count = filter.id === 'all'
-            ? portfolioData.achievements.length
-            : portfolioData.achievements.filter((item) => matchesFilter(item, filter.id)).length
-          return (
-            <button
-              type="button"
-              className={`filter-btn ${activeFilter === filter.id ? 'active' : ''}`}
-              data-filter={filter.id}
-              key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
-              role="tab"
-              aria-selected={activeFilter === filter.id}
-            >
-              {filter.label} <span className="count">({count})</span>
-            </button>
-          )
-        })}
-      </div>
+      <Reveal>
+        <div className="achievements-filter-bar" role="tablist" aria-label="Filter credentials by category">
+          {filters.map((filter) => {
+            const count = filter.id === 'all'
+              ? portfolioData.achievements.length
+              : portfolioData.achievements.filter((item) => matchesFilter(item, filter.id)).length
+            return (
+              <button
+                type="button"
+                className={`filter-btn ${activeFilter === filter.id ? 'active' : ''}`}
+                data-filter={filter.id}
+                key={filter.id}
+                onClick={() => setActiveFilter(filter.id)}
+                role="tab"
+                aria-selected={activeFilter === filter.id}
+              >
+                {filter.label} <span className="count">({count})</span>
+              </button>
+            )
+          })}
+        </div>
+      </Reveal>
 
       <div className="contact-sheet-grid" id="achievementsGrid" role="region" aria-label="Credentials contact sheet">
-        {records.map((item) => (
+        {records.map((item, index) => (
           <article
             className="proof-card"
             data-gsap-card

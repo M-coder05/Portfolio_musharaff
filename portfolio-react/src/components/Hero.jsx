@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { Fragment, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import portfolioData from '../data/portfolioData'
 import { buildWhatsAppLink } from '../utils/whatsapp'
@@ -6,6 +6,7 @@ import { gsap, refreshAfterImages } from '../utils/gsap'
 
 const { personal, projects } = portfolioData
 const featuredProject = projects.find((project) => project.featured)
+const nameWords = personal.name.split(' ')
 
 export default function Hero({ introFinished }) {
   const scopeRef = useRef(null)
@@ -15,17 +16,37 @@ export default function Hero({ introFinished }) {
 
     const media = gsap.matchMedia()
     media.add('(prefers-reduced-motion: no-preference)', () => {
-      const items = scopeRef.current.querySelectorAll('[data-hero-entrance]')
-      gsap.fromTo(items, {
-        autoAlpha: 0,
-        y: 24,
-      }, {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.78,
-        stagger: 0.1,
-        ease: 'power3.out',
+      const words = [...scopeRef.current.querySelectorAll('[data-hero-word]')]
+      const items = [...scopeRef.current.querySelectorAll('[data-hero-entrance]')]
+      const timeline = gsap.timeline({
+        defaults: { ease: 'power3.out' },
+        onComplete: () => gsap.set([...words, ...items], {
+          clearProps: 'opacity,visibility,transform',
+        }),
       })
+
+      timeline
+        .fromTo(words, {
+          autoAlpha: 0,
+          yPercent: 60,
+          rotate: 2,
+        }, {
+          autoAlpha: 1,
+          yPercent: 0,
+          rotate: 0,
+          duration: 0.8,
+          stagger: 0.09,
+        })
+        .fromTo(items, {
+          autoAlpha: 0,
+          y: 24,
+        }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.78,
+          stagger: 0.1,
+        }, '-=0.5')
+
       return refreshAfterImages(scopeRef.current)
     })
     return () => media.revert()
@@ -59,7 +80,14 @@ export default function Hero({ introFinished }) {
             <span>/</span>
             <span>UNDERGRADUATE FOLIO</span>
           </div>
-          <h1 className="hero-headline" id="heroName" data-hero-entrance>{personal.name}</h1>
+          <h1 className="hero-headline" id="heroName" aria-label={personal.name}>
+            {nameWords.map((word, index) => (
+              <Fragment key={`${word}-${index}`}>
+                <span className="hero-word" data-hero-word aria-hidden="true">{word}</span>
+                {index < nameWords.length - 1 ? ' ' : null}
+              </Fragment>
+            ))}
+          </h1>
           <p className="hero-statement" id="heroFocus" data-hero-entrance>{personal.title}</p>
           <p className="hero-statement" data-hero-entrance>{personal.focus}</p>
           <div className="hero-availability-bar" id="heroAvailability" data-hero-entrance>

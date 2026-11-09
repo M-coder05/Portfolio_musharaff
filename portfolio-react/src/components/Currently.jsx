@@ -7,9 +7,11 @@ export default function Currently() {
       <Reveal>
         <h2 id="currently-title">{portfolioData.currentlyCopy.title}</h2>
       </Reveal>
-      <ul>
-        {portfolioData.currently.map((item) => <li key={item}>{item}</li>)}
-      </ul>
+      <Reveal selector="li" stagger={0.07} y={12}>
+        <ul>
+          {portfolioData.currently.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+      </Reveal>
     </section>
   )
 }

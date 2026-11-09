@@ -1,21 +1,27 @@
 import portfolioData from '../data/portfolioData'
+import PlateHeader from './PlateHeader'
 import Reveal from './Reveal'
 
 export default function Repositories() {
   return (
     <section className="plate-section repository-section" id="github" aria-labelledby="repositories-title">
-      <div className="plate-header">
-        <div className="plate-marker">
-          <span className="plate-marker-num">PLATE NO. 06</span>
-          <span className="plate-marker-class">OPEN SOURCE</span>
-        </div>
-        <div className="plate-title-row">
-          <Reveal><h2 className="plate-title" id="repositories-title">{portfolioData.repositoriesCopy.title}</h2></Reveal>
-          <a className="repository-profile-link" href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer">
+      <PlateHeader
+        number="PLATE NO. 06"
+        classification="OPEN SOURCE"
+        title={portfolioData.repositoriesCopy.title}
+        titleId="repositories-title"
+        action={(
+          <a
+            className="repository-profile-link"
+            href={portfolioData.personal.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-plate-action
+          >
             {portfolioData.repositoriesCopy.profileLink} ↗
           </a>
-        </div>
-      </div>
+        )}
+      />
       <div className="repository-list">
         {portfolioData.repositories.map((repo) => (
           <Reveal key={repo.name}>

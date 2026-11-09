@@ -11,8 +11,10 @@ export function animateCardBatch(container, animatedIds) {
   const newCards = cards.filter((card) => !animatedIds.has(card.dataset.cardId))
   const animatedCards = cards.filter((card) => animatedIds.has(card.dataset.cardId))
 
-  gsap.set(animatedCards, { clearProps: 'opacity,visibility,transform' })
   gsap.set(newCards, { autoAlpha: 0, y: 18 })
+  if (animatedCards.length) {
+    gsap.set(animatedCards, { clearProps: 'opacity,visibility,transform' })
+  }
 
   if (newCards.length) {
     ScrollTrigger.batch(newCards, {

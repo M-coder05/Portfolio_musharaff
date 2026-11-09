@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import portfolioData from '../data/portfolioData'
-import Reveal from './Reveal'
+import PlateHeader from './PlateHeader'
 import { animateCardBatch, gsap, refreshAfterImages } from '../utils/gsap'
 
 function ProjectGallery({ project }) {
@@ -21,6 +21,7 @@ function ProjectGallery({ project }) {
         onClick={() => lightboxRef.current?.showModal()}
       >
         <img
+          key={activeImage.src}
           id={`heroImg-${project.id}`}
           src={activeImage.src}
           alt={activeImage.caption}
@@ -85,6 +86,7 @@ function ProjectGallery({ project }) {
         </div>
         <figure className="project-image-dialog-figure">
           <img
+            key={activeImage.src}
             src={activeImage.src}
             alt={activeImage.caption}
             width={activeImage.width}
@@ -211,16 +213,13 @@ export default function Projects() {
 
   return (
     <section className="plate-section" id="proofs" aria-labelledby="proofsTitle" ref={scopeRef}>
-      <div className="plate-header">
-        <div className="plate-marker">
-          <span className="plate-marker-num">PLATE NO. 04 &amp; 05</span>
-          <span className="plate-marker-class">PRODUCTION WORK</span>
-        </div>
-        <div className="plate-title-row">
-          <Reveal><h2 className="plate-title" id="proofsTitle">Proofs</h2></Reveal>
-          <span className="plate-caption">COMMERCIAL &amp; FULL-STACK APPS</span>
-        </div>
-      </div>
+      <PlateHeader
+        number="PLATE NO. 04 & 05"
+        classification="PRODUCTION WORK"
+        title="Proofs"
+        titleId="proofsTitle"
+        caption="COMMERCIAL & FULL-STACK APPS"
+      />
       <div className="project-filters" role="group" aria-label={portfolioData.projectFilterLabel}>
         {filters.map((filter) => (
           <button type="button" key={filter} className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}

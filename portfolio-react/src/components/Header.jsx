@@ -17,6 +17,7 @@ export default function Header() {
   const isMenuOpenRef = useRef(false)
   const [isCompact, setIsCompact] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+  const progressRef = useRef(null)
 
   function updateMenuOpen(nextOpen) {
     isMenuOpenRef.current = nextOpen
@@ -24,13 +25,32 @@ export default function Header() {
   }
 
   useEffect(() => {
-    function updateCompactState() {
+    function updateScrollState() {
       setIsCompact(window.scrollY > 24)
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      const progress = max > 0 ? window.scrollY / max : 0
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`
+      }
     }
 
-    updateCompactState()
-    window.addEventListener('scroll', updateCompactState, { passive: true })
-    return () => window.removeEventListener('scroll', updateCompactState)
+    let frame = 0
+    function handleScroll() {
+      if (frame) return
+      frame = window.requestAnimationFrame(() => {
+        frame = 0
+        updateScrollState()
+      })
+    }
+
+    updateScrollState()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
   }, [])
 
   useEffect(() => {
@@ -122,6 +142,7 @@ export default function Header() {
           </button>
         </div>
       </div>
+      <span className="folio-progress" ref={progressRef} aria-hidden="true" />
     </header>
   )
 }

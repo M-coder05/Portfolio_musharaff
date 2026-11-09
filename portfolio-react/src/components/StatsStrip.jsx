@@ -9,6 +9,21 @@ export default function StatsStrip() {
   useGSAP(() => {
     const media = gsap.matchMedia()
     media.add('(prefers-reduced-motion: no-preference)', () => {
+      const items = [...scopeRef.current.querySelectorAll('.stat-item')]
+      gsap.fromTo(items, { autoAlpha: 0, y: 16 }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.09,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: scopeRef.current,
+          start: 'top 90%',
+          once: true,
+        },
+        onComplete: () => gsap.set(items, { clearProps: 'opacity,visibility,transform' }),
+      })
+
       const counters = [...scopeRef.current.querySelectorAll('[data-count-target]')]
       counters.forEach((element) => {
         const value = element.dataset.countTarget
