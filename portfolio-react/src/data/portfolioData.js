@@ -7,14 +7,16 @@
 const featuredCredentials = [
   {
     id: "aws-academy-cloud-architecting",
-    title: "AWS Academy Graduate / Cloud Architecting (Trained)",
+    title: "AWS Academy Graduate - Cloud Architecting",
     issuer: "AWS Academy",
     type: "Training badge",
     image: "assets/images/badges/aws-academy-cloud-architecting.png",
-    alt: "AWS Academy Cloud Architecting badge marked Trained",
+    alt: "AWS Academy Graduate - Cloud Architecting training badge",
     width: 821,
     height: 712,
-    category: "cloud"
+    category: "cloud",
+    date: "October 10, 2026",
+    highlight: "60 hours"
   },
   {
     id: "google-cloud-data-analytics",
@@ -46,7 +48,7 @@ const PORTFOLIO_DATA = {
     linkedin: "https://www.linkedin.com/in/mohammedmusharaff-m",
     linkedinDisplay: "linkedin.com/in/mohammedmusharaff-m",
     portfolio: "https://mohammedmusharaffm.in/",
-    resumePath: "assets/resume/Mohammed_Musharaff_Resume.pdf",
+    resumePath: "/assets/resume/Mohammed_Musharaff_Resume.pdf?v=2026-11",
     resumeLabel: "Download Resume",
     sameAs: [
       "https://github.com/M-coder05",
@@ -54,7 +56,7 @@ const PORTFOLIO_DATA = {
       "https://mohammedmusharaffm.in/"
     ],
     education: {
-      degree: "Bachelor of Engineering in Computer Science and Engineering",
+      degree: "B.E. Computer Science and Engineering",
       institution: "M.A.M College of Engineering and Technology, Tiruchirappalli",
       period: "2023 – 2027",
       cgpa: "7.92 (Current)",
@@ -62,7 +64,7 @@ const PORTFOLIO_DATA = {
     },
     summaryParagraphs: [
       "I am a final-year Computer Science and Engineering undergraduate at M.A.M College of Engineering and Technology, Tiruchirappalli, graduating in 2027. My current CGPA is 7.92 (Current).",
-      "I have completed web development internships at F5CODER and Elewayte, and a Python development internship at Scopik. I have experience building responsive websites with HTML, CSS, and JavaScript, and I am learning AI/ML and Computer Vision to build practical software solutions."
+      "I have completed web development internships at F5CODER and Elewayte, and a Python development internship at Scopik Edutech Pvt. Ltd. I have experience building responsive websites with HTML, CSS, and JavaScript, and I am learning AI/ML and Computer Vision to build practical software solutions."
     ],
     languages: ["English", "Tamil", "Hindi", "Urdu"],
     availability: "Open for 2026–2027 Engineering Internships & Frontend Roles"
@@ -78,7 +80,8 @@ const PORTFOLIO_DATA = {
         { name: "HTML5", detail: "Semantic page structure" },
         { name: "CSS3", detail: "Responsive layouts and styling" },
         { name: "JavaScript", detail: "Interactive browser experiences" },
-        { name: "Responsive Web Design", detail: "Layouts for mobile, tablet, and desktop" },
+        { name: "Responsive Design", detail: "Layouts for mobile, tablet, and desktop" },
+        { name: "UI Layout", detail: "Interface layout" },
         { name: "Bootstrap", detail: "Responsive UI toolkit" },
         { name: "React.js", detail: "Practical use building this portfolio" }
       ]
@@ -96,9 +99,10 @@ const PORTFOLIO_DATA = {
       category: "Backend & Database",
       lead: "Foundational server-side and data technologies",
       items: [
-        { name: "Node.js", detail: "Server-side JavaScript fundamentals" },
-        { name: "Express.js", detail: "Backend routing and REST API fundamentals" },
-        { name: "MongoDB", detail: "Document database fundamentals" }
+        { name: "Node.js (Basic)", detail: "Server-side JavaScript fundamentals" },
+        { name: "Express.js (Basic)", detail: "Backend routing and REST API fundamentals" },
+        { name: "MongoDB (Basic)", detail: "Document database fundamentals" },
+        { name: "MongoDB Atlas", detail: "Database used in the Smart Student Service Portal" }
       ]
     },
     {
@@ -126,8 +130,8 @@ const PORTFOLIO_DATA = {
       plateNumber: "TR-01",
       role: "Web Development Intern",
       organization: "F5CODER",
-      period: "Aug 2025 – Oct 2025",
-      duration: "3 Months (Extended with Offer Letter Nov '25 – Jan '26)",
+      period: "2025",
+      duration: "2025",
       location: "Tiruchirappalli, Tamil Nadu",
       type: "Internship",
       highlights: [
@@ -140,7 +144,7 @@ const PORTFOLIO_DATA = {
     {
       id: "scopik-2025",
       plateNumber: "TR-02",
-      role: "Python Developer (Intern)",
+      role: "Python Developer",
       organization: "Scopik Edutech Pvt. Ltd.",
       period: "27 Jun 2025 – 19 Jul 2025",
       duration: "Internship Training",
@@ -322,7 +326,7 @@ const PORTFOLIO_DATA = {
 
   seo: {
     title: "Mohammed Musharaff S | Frontend Developer",
-    description: "Portfolio of Mohammed Musharaff S, a Computer Science and Engineering student, frontend developer, and aspiring AI/ML and Computer Vision developer.",
+    description: "Portfolio of Mohammed Musharaff S, a B.E. Computer Science and Engineering student at M.A.M College of Engineering and Technology, Tiruchirappalli. Skills include Python, Java, C, JavaScript, HTML5, CSS3, responsive design, UI layout, Node.js (Basic), Express.js (Basic), MongoDB (Basic), and MongoDB Atlas.",
     image: "og-image.png"
   },
   contactCopy: {
@@ -419,7 +423,7 @@ const PORTFOLIO_DATA = {
       event: "Departmental Recognition for Web Development",
       issuer: "M.A.M. College of Engineering & Technology (CSE Dept)",
       date: "2025",
-      highlight: "Recognized for valuable contribution, commitment, and mentoring junior students in JavaScript.",
+      highlight: "Recognized for valuable contribution, commitment, and mentoring junior students in JavaScript for about a week.",
       image: "assets/images/achievements/awards/innovatrix-web-dev-memento-plaque.webp",
       width: 527,
       height: 716,
